@@ -1,0 +1,39 @@
+version: "3.9"
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: 123
+    ports:
+      - "3306:3306"
+    networks:
+      - app-tier
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    env_file:
+      - ./api/.env
+    ports:
+      - "3005:3000"
+    networks:
+      - app-tier
+    depends_on:
+      - db
+    volumes:
+      - api_data:/app/data
+
+volumes:
+  db_data:
+  api_data:

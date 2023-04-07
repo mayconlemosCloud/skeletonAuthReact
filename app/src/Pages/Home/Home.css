@@ -1,0 +1,23 @@
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.item:hover {
+  background-color: #f4f4f4;
+}
+
+.item.dragging {
+  opacity: 0.5;
+  /* Adiciona outros estilos de acordo com a preferência */
+}
